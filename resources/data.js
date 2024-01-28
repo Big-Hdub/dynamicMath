@@ -1,6 +1,7 @@
-import { cEl, equationMaker, mathCreator, fillPs, listener } from "../scripts/helpers.js"
+import { cEl, equationMaker, mathCreator, fillPs, listener, check, buildPage } from "../scripts/helpers.js"
 
 export default {
+    buildPage: buildPage,
     header: cEl("header", [["id", "header"]], ""),
     main: cEl("main", [["id", "main"]], ""),
     footer: cEl("footer", [["id", "footer"]]),
@@ -17,9 +18,9 @@ export default {
     selectO8: cEl("option", [["class", "options"], ["value", "o8"]], "Work with 8"),
     selectO9: cEl("option", [["class", "options"], ["value", "o9"]], "Work with 9"),
     selectO10: cEl("option", [["class", "options"], ["value", "o10"]], "Work with 10"),
-    selectO11: cEl("option", [["class", "options"], ["value", "o11"]], "Random 1 - 20"),
-    selectO12: cEl("option", [["class", "options"], ["value", "o12"]], "Random 1 - 100"),
-    selectO13: cEl("option", [["class", "options"], ["value", "o13"]], "Random 1 - 1000"),
+    selectO11: cEl("option", [["class", "options"], ["value", "o11"]], "Random 0 - 20"),
+    selectO12: cEl("option", [["class", "options"], ["value", "o12"]], "Random 0 - 100"),
+    selectO13: cEl("option", [["class", "options"], ["value", "o13"]], "Random 0 - 1000"),
     navBut1: cEl("button", [["id", "addition"], ["class", "navButtons"]], "Addition"),
     navBut2: cEl("button", [["id", "subtraction"], ["class", "navButtons"]], "Subtraction"),
     navBut3: cEl("button", [["id", "multiplication"], ["class", "navButtons"]], "Multiplication"),
@@ -28,9 +29,7 @@ export default {
     checkAns: cEl("button", [["id", "check"]], "Check Answers"),
     mathCreator: mathCreator,
     fillPs: fillPs,
-    check: () => {
-
-    },
+    check: check,
     listener: listener,
     addObj: {
         o1: (operation) => mathCreator(1, operation),

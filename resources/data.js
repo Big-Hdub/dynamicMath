@@ -1,4 +1,4 @@
-import { cEl, equationMaker, mathCreator, fillPs } from "../scripts/helpers.js"
+import { cEl, equationMaker, mathCreator, fillPs, listener } from "../scripts/helpers.js"
 
 export default {
     header: cEl("header", [["id", "header"]], ""),
@@ -24,10 +24,27 @@ export default {
     navBut2: cEl("button", [["id", "subtraction"], ["class", "navButtons"]], "Subtraction"),
     navBut3: cEl("button", [["id", "multiplication"], ["class", "navButtons"]], "Multiplication"),
     navBut4: cEl("button", [["id", "division"], ["class", "navButtons"]], "Division"),
-    equationDivs: equationMaker(10, 3),
+    equationDivs: equationMaker(10, 1),
     checkAns: cEl("button", [["id", "check"]], "Check Answers"),
     mathCreator: mathCreator,
-    // randomInt: randomInt,
-    // op: op,
     fillPs: fillPs,
+    check: () => {
+
+    },
+    listener: listener,
+    addObj: {
+        o1: (operation) => mathCreator(1, operation),
+        o2: (operation) => mathCreator(2, operation),
+        o3: (operation) => mathCreator(3, operation),
+        o4: (operation) => mathCreator(4, operation),
+        o5: (operation) => mathCreator(5, operation),
+        o6: (operation) => mathCreator(6, operation),
+        o7: (operation) => mathCreator(7, operation),
+        o8: (operation) => mathCreator(8, operation),
+        o9: (operation) => mathCreator(9, operation),
+        o10: (operation) => mathCreator(10, operation),
+        o11: (operation) => mathCreator(20, operation),
+        o12: (operation) => mathCreator(100, operation),
+        o13: (operation) => mathCreator(1000, operation)
+    }
 }

@@ -111,12 +111,20 @@ p {
     margin: 0;
     height: 80px;
     line-height: 40px;
-    text-align: right;
+    text-align: center;
+    justify-content: right;
+    font-size: 80px;
+    padding-right: 13px;
+    padding-top: 15px;
+}
+
+.eqContainers>p:nth-child(2) {
+    justify-content: space-between;
 }
 
 .answerDivs {
     width: 100%;
-    height: 80px;
+    height: 100px;
     flex-direction: row;
     justify-content: right;
     align-items: center;
@@ -126,9 +134,17 @@ p {
 
 .answerBoxes {
     padding: 10px;
-    width: 50px;
+    width: 100%;
     height: 70px;
+    background-color: rgba(185, 151, 192, 0.514);
+    text-align: right;
+    font-size: 70px;
 }
+
+/* p, */
+/* .answerBoxes { */
+/* font-family: Arial; */
+/* } */
 
 #footer {
     padding: 20px;

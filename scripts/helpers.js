@@ -105,7 +105,7 @@ export const check = () => {
             alert("Good job!!! All are correct.")
             navButtons.forEach(butt => butt.removeAttribute("disabled"));
             check.setAttribute("disabled", true);
-            data.buildPage();
+            data.clearSheet();
         } else {
             alert(res.filter(e => e === true).length + " Correct, almost got it.")
         }
@@ -120,4 +120,9 @@ export const buildPage = () => {
     data.hNav.append(data.navBut1, data.navBut2, data.navBut3, data.navBut4);
     data.main.append(data.equationDivs[0], data.equationDivs[1], data.equationDivs[2], data.equationDivs[3], data.equationDivs[4], data.equationDivs[5], data.equationDivs[6], data.equationDivs[7], data.equationDivs[8], data.equationDivs[9],);
     data.footer.append(data.checkAns);
+}
+
+export const clearSheet = () => {
+    document.querySelectorAll("p").forEach(p => p.innerText = "");
+    // document.querySelectorAll("input").forEach(input => input.removeAttribute("value"));
 }

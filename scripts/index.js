@@ -4,8 +4,6 @@ import { fillPs } from "./helpers.js";
 document.addEventListener("DOMContentLoaded", (event) => {
     data.buildPage();
 
-
-
     data.listener('addition');
     data.listener('subtraction');
     data.listener('multiplication');

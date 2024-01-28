@@ -1,7 +1,8 @@
-import { cEl, equationMaker, mathCreator, fillPs, listener, check, buildPage } from "../scripts/helpers.js"
+import { cEl, equationMaker, mathCreator, fillPs, listener, check, buildPage, clearSheet } from "../scripts/helpers.js"
 
 export default {
     buildPage: buildPage,
+    clearSheet: clearSheet,
     header: cEl("header", [["id", "header"]], ""),
     main: cEl("main", [["id", "main"]], ""),
     footer: cEl("footer", [["id", "footer"]]),

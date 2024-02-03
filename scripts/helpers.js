@@ -32,7 +32,7 @@ export const equationMaker = (num, fields) => {
     return arr;
 };
 
-const randomInt = (max) => Math.floor(Math.random() * (max + 1));
+const randomInt = (max, min = 0) => Math.floor(Math.random() * (max - min) + min);
 
 export const fillPs = (ps, nums) => {
     ps[0].innerText = nums[0]
@@ -54,16 +54,69 @@ export const mathCreator = (value, operation) => {
         needRandom = false;
     } else if (value <= 20) max = 21;
     else if (value <= 100) max = 101;
-    const res = [value, 0, op[operation]]
-    if (needRandom) {
-        res[0] = randomInt(max);
-        res[1] = randomInt(max);
-    } else if (randomInt(2) > 1) {
-        res[1] = randomInt(max);
-    } else {
-        res[0] = randomInt(max);
-        res[1] = value;
-    }
+    const res = [value, 0, op[operation]];
+    switch (operation) {
+        case "addition":
+            if (needRandom) {
+                res[0] = randomInt(max);
+                res[1] = randomInt(max);
+            } else if (randomInt(2) >= 1) {
+                res[1] = randomInt(max);
+            } else {
+                res[0] = randomInt(max);
+                res[1] = value;
+            };
+            break;
+        case "subtraction":
+            if (needRandom) {
+                let num1, num2;
+                if (max < 1000) {
+                    num1 = randomInt(max * 2);
+                    num2 = randomInt(max * 2);
+                } else {
+                    num1 = randomInt(max);
+                    num2 = randomInt(max);
+                }
+                res[0] = Math.max(num1, num2);
+                res[1] = Math.min(num1, num2);
+            } else {
+                res[0] = randomInt(max * 2, value);
+                res[1] = value;
+            }
+            break;
+        case "multiplication":
+            if (needRandom) {
+                if (max <= 101) {
+                    res[0] = randomInt(11);
+                    res[1] = randomInt(11);
+                } else {
+                    res[0] = randomInt(21);
+                    res[1] = randomInt(21);
+                }
+            } else if (randomInt(2) > 1) {
+                res[1] = randomInt(max);
+            } else {
+                res[0] = randomInt(max);
+                res[1] = value;
+            }
+            break;
+        case "division":
+            if (needRandom) {
+                if (max <= 101) {
+                    const num1 = randomInt(11, 1);
+                    res[0] = num1 * randomInt(11);
+                    res[1] = num1;
+                } else {
+                    const num1 = randomInt(21, 1);
+                    res[0] = num1 * randomInt(21);
+                    res[1] = num1;
+                }
+            } else {
+                res[0] = value * randomInt(max, 1);
+                res[1] = value;
+            }
+            break;
+    };
     return res;
 };
 
@@ -72,8 +125,7 @@ const operation = {
     subtraction: (num1, num2) => num1 - num2,
     multiplication: (num1, num2) => num1 * num2,
     division: (num1, num2) => num1 / num2
-}
-
+};
 
 export const listener = (buttonName) => {
     const input = document.querySelectorAll("input");
@@ -82,9 +134,21 @@ export const listener = (buttonName) => {
     document.getElementById(`${buttonName}`).addEventListener('click', () => {
         input.forEach(eq => eq.value = "")
         const equationContainers = document.querySelectorAll(".eqContainers");
+        const problems = [];
         equationContainers.forEach(eq => {
             const children = eq.childNodes;
-            const currentProblem = data.addObj[data.hOptions.value](buttonName);
+            let currentProblem;
+            let check = 0;
+            while (check === 0) {
+                check++;
+                currentProblem = data.addObj[data.hOptions.value](buttonName);
+                if (problems.length) {
+                    problems.forEach(p => {
+                        if (p[0] === currentProblem[0] && p[1] === currentProblem[1]) check = 0;
+                    })
+                }
+            }
+            problems.push(currentProblem);
             fillPs([children[0], children[1]], currentProblem);
             const answer = operation[buttonName];
             eq.lastChild.lastChild.setAttribute("answer", answer(currentProblem[0], currentProblem[1]));

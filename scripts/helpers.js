@@ -11,7 +11,7 @@ export const cEl = (tag, att, text) => {
     return el;
 };
 
-export const equationMaker = (num, fields) => {
+export const equationMaker = (num) => {
     const arr = new Array(num);
     for (let i = 0; i < arr.length; i++) {
         const div = document.createElement("div");
@@ -23,10 +23,9 @@ export const equationMaker = (num, fields) => {
         p2.setAttribute("id", `N${i}P2`);
         const answerDiv = document.createElement("div");
         answerDiv.setAttribute("class", "answerDivs")
-        for (let j = 0; j < fields; j++) {
-            answerDiv.innerHTML += `<input type="text" class="answerBoxes" id="ans${i}${j}" name="ans${i}${j}" required/>`;
-        }
         div.append(p1, p2, answerDiv);
+        const input = cEl("input", [["type", "text"], ["class", `answerBoxes ans${i}`], ["name", `ans${i}`]], "")
+        answerDiv.append(input);
         arr[i] = div;
     }
     return arr;
@@ -158,6 +157,11 @@ export const listener = (buttonName) => {
     });
 }
 
+export const clearSheet = () => {
+    location.reload();
+    document.querySelectorAll("input").forEach(i => i.value = "");
+}
+
 export const check = () => {
     const input = document.querySelectorAll("input");
     const navButtons = document.querySelectorAll(".navButtons");
@@ -169,7 +173,7 @@ export const check = () => {
             alert("Good job!!! All are correct.")
             navButtons.forEach(butt => butt.removeAttribute("disabled"));
             check.setAttribute("disabled", true);
-            data.clearSheet();
+            clearSheet();
         } else {
             alert(res.filter(e => e === true).length + " Correct, almost got it.")
         }
@@ -182,11 +186,7 @@ export const buildPage = () => {
     data.hDiv.append(data.hOptions);
     data.hOptions.append(data.selectO1, data.selectO2, data.selectO3, data.selectO4, data.selectO5, data.selectO6, data.selectO7, data.selectO8, data.selectO9, data.selectO10, data.selectO11, data.selectO12, data.selectO13);
     data.hNav.append(data.navBut1, data.navBut2, data.navBut3, data.navBut4);
-    data.main.append(data.equationDivs[0], data.equationDivs[1], data.equationDivs[2], data.equationDivs[3], data.equationDivs[4], data.equationDivs[5], data.equationDivs[6], data.equationDivs[7], data.equationDivs[8], data.equationDivs[9],);
+    const equationDivs = equationMaker(10);
+    data.main.append(equationDivs[0], equationDivs[1], equationDivs[2], equationDivs[3], equationDivs[4], equationDivs[5], equationDivs[6], equationDivs[7], equationDivs[8], equationDivs[9],);
     data.footer.append(data.checkAns);
-}
-
-export const clearSheet = () => {
-    document.querySelectorAll("p").forEach(p => p.innerText = "");
-    // document.querySelectorAll("input").forEach(input => input.removeAttribute("value"));
 }

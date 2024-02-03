@@ -26,7 +26,7 @@ export default {
     navBut2: cEl("button", [["id", "subtraction"], ["class", "navButtons"]], "Subtraction"),
     navBut3: cEl("button", [["id", "multiplication"], ["class", "navButtons"]], "Multiplication"),
     navBut4: cEl("button", [["id", "division"], ["class", "navButtons"]], "Division"),
-    equationDivs: equationMaker(10, 1),
+    equationDivs: equationMaker,
     checkAns: cEl("button", [["id", "check"]], "Check Answers"),
     mathCreator: mathCreator,
     fillPs: fillPs,
